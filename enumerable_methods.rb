@@ -52,9 +52,19 @@ module Enumerable
     condition
   end
 
-  def my_none
-    
+  def my_none?
+    condition = true
+    if block_given?
+      my_each do |item|
+        if (yield item) == false
+          condition = false
+          break
+        end
+       !condition
+      end
+    end
+    condition
   end
 end
 
-p (%w[ant bear cat].all? { |word| word.length >= 3 })
+p (%w[err hjk].my_none? { |word| word.length.nil? })
