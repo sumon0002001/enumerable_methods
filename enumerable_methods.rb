@@ -1,5 +1,6 @@
-# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-# frozen_string_literal: true
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# frozen_string_literal: false
 
 module Enumerable
   def my_each
@@ -110,4 +111,5 @@ module Enumerable
   end
 end
 
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
