@@ -52,7 +52,7 @@ module Enumerable
     condition
   end
 
-  def my_none
+  def my_none?
     
   end
 end
