@@ -108,4 +108,4 @@ module Enumerable
     items.my_inject { |result, item| result * item }
   end
 end
-
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity111
