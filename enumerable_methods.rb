@@ -65,6 +65,28 @@ module Enumerable
     end
     condition
   end
-end
+
+  def my_count
+  
+     counter = 0
+     if block_given?
+      my_each { |item| counter +=1 if yield (item) }
+      array
+     end
+
+     def my_map (proc = nil)
+      array = []
+      if block_given
+        my_each {|item| array << yield(item)}
+      else 
+        my_each{|item| array << proc.call(item)}
+       
+      end
+      array
+    end
+
+      def my_inject
+
+  end
 
 p (%w[err hjk].my_none? { |word| word.length.nil? })
