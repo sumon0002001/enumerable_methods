@@ -1,4 +1,5 @@
-# Using enumerable module
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
 module Enumerable
   def my_each
     i = 0
@@ -107,3 +108,4 @@ module Enumerable
     items.my_inject { |result, item| result * item }
   end
 end
+
