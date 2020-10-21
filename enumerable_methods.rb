@@ -57,6 +57,7 @@ module Enumerable
     end
     false
   end
+
   def my_none?
     condition = true
     if block_given?
@@ -82,7 +83,7 @@ module Enumerable
     count
   end
 
-  def my_map (parameter = nil)
+  def my_map(parameter = nil)
     return to_enum(:my_map) unless block_given?
 
     array = []
@@ -106,7 +107,3 @@ module Enumerable
     items.my_inject { |result, item| result * item }
   end
 end
-
-
-
-
