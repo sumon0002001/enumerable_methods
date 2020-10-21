@@ -1,5 +1,4 @@
-# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
-# frozen_string_literal: true
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Style/FrozenStringLiteralComment
 
 module Enumerable
   def my_each
@@ -109,4 +108,5 @@ module Enumerable
     items.my_inject { |result, item| result * item }
   end
 end
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Style/FrozenStringLiteralComment
