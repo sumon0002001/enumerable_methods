@@ -1,10 +1,7 @@
 # rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Style/FrozenStringLiteralComment
 # rubocop:disable Lint/RedundantCopDisableDirective
 # frozen_string_literal: true
-
 
 module Enumerable
   def my_each
@@ -116,7 +113,5 @@ module Enumerable
 end
 
 # rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Style/FrozenStringLiteralComment
 # rubocop:enable Lint/RedundantCopDisableDirective
