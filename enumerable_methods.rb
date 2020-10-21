@@ -24,7 +24,7 @@ module Enumerable
     array
   end
 
-  def my_all?(args)
+  def my_all?
     condition = true
     if block_given?
       my_each do |item|
@@ -35,15 +35,26 @@ module Enumerable
         condition
       end
     end
-    i = 0
-    until i == size || condition == false
-      if self[i] != args
-        condition = false
+    condition
+  end
+
+  def my_any?
+    condition = false
+    if block_given?
+      my_each do |item|
+        if (yield item) == true
+          condition = true
+          break
+        end
+        condition
       end
-      i += 1
     end
     condition
   end
+
+  def my_none
+    
+  end
 end
 
-p ([].all?)
+p (%w[ant bear cat].all? { |word| word.length >= 3 })
