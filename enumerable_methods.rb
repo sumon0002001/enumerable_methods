@@ -24,34 +24,39 @@ module Enumerable
     array
   end
 
-  def my_all?
-    condition = true
+  def my_all?(argument = nil)
     if block_given?
-      my_each do |item|
-        if (yield item) == false
-          condition = false
-          break
-        end
-        condition
-      end
+      my_each { |item| return false if yield(item) == false }
+      true
+    elsif argument.nil?
+      my_each { |item| return false if item.nil? || item == false }
+    elsif !argument.nil? && argument.is_a?(Class)
+      my_each { |item| return false unless [item.class, item.class.superclass].include?(argument) }
+    elsif argument.class == Regexp
+      my_each { |item| return false unless argument.match(item) }
+    else my_each { |item| return false if item != argument }
     end
-    condition
+    true
   end
 
-  def my_any?
-    condition = false
+  def my_any?(argument = nil)
     if block_given?
-      my_each do |item|
-        if (yield item) == true
-          condition = true
-          break
-        end
-        condition
-      end
+      my_each { |item| return true if yield(item) }
+      return false
     end
-    condition
-  end
+    argument.nil? ? argument.class.to_s : my_any? { |item| item }
 
+    if argument.class.to_s == 'Class'
+      my_each { |item| return true if item.is_a? argument }
+    elsif argument.class.to_s == 'Regexp'
+      my_each { |item| return true if item =~ argument }
+    elsif argument.nil?
+      my_each { |item| return true if item }
+    else
+      my_each { |item| return true if item == argument }
+    end
+    false
+  end
   def my_none?
     condition = true
     if block_given?
@@ -96,8 +101,12 @@ module Enumerable
     my_each { |item| result = result.nil? ? item : yield(result, item) }
     result
   end
+
+  def multiply_els(items)
+    items.my_inject { |result, item| result * item }
+  end
 end
 
-a = [0]
-p (a.inject(1) { |product, n| product * n })
+
+
 
