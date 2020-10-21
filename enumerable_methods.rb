@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Style/FrozenStringLiteralComment
-# frozen_string_literal: false
+
 
 module Enumerable
   def my_each
