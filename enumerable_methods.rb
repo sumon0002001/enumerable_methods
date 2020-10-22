@@ -1,5 +1,3 @@
-# rubocop:disable all
-
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -39,11 +37,11 @@ module Enumerable
     if block_given?
       my_each { |item| return false if yield(item) == false }
       true
-    elsif !arg.nil? and arg.is_a?(Class)
+    elsif !arg.nil? && arg.is_a?(Class)
       my_each { |item| return false unless [item.class, item.class.superclass].include?(arg) }
     elsif arg.nil?
       my_each { |item| return false if item.nil? || item == false }
-    elsif !arg.nil? && arg.class == Regexp
+    elsif !arg.nil? && arg.instance_of?(Regexp)
       my_each { |item| return false unless arg.match(item) }
     else
       my_each { |item| return false if item != arg }
@@ -52,27 +50,24 @@ module Enumerable
   end
 
   def my_any?(arg = nil) 
-   result = false 
-    to_a.my_each do |item| 
-      if block_given? 
-        if yield(item) 
-          result = true 
-          break 
-        elsif 
-          !yield(item) 
-          result = false 
-        end 
-      elsif arg.nil? 
-        result = true if item 
-      else 
-        if arg === item
-          result = true 
-          break 
-        end 
-      end 
-    end 
-    result 
-  end 
+    result = false
+    to_a.my_each do |item|
+      if block_given?
+        if yield(item)
+          result = true
+          break
+        elsif !yield(item)
+          result = false
+        end
+      elsif arg.nil?
+        result = true if item
+      elsif arg == item
+        result = true
+        break
+      end
+    end
+    result
+  end
 
   def my_none?(argument = nil, &block)
     !my_any?(argument, &block)
@@ -116,7 +111,6 @@ module Enumerable
   end
 end
 
-  # rubocop: enable all
 def multiply_els(items)
   items.my_inject { |result, item| result * item }
 end
