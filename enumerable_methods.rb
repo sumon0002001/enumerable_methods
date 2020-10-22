@@ -1,5 +1,4 @@
-# my_Enumerable
-# rubocobStyle/Documentation
+# rubocop:disable all
 
 module Enumerable
   def my_each
@@ -16,15 +15,13 @@ module Enumerable
     self
   end
 
-  def my_each_with_index
+  def my_each_with_index()
     return to_enum(:my_each_with_index) unless block_given?
 
-    item = self if instance_of?(Array)
-    item = to_a if instance_of?(Range) || Hash
+    item = to_a
     i = 0
-
-    until i < item.length
-      yield(item[i], i)
+    while i < var.length
+      yield(var[i], i)
       i += 1
     end
     self
@@ -87,7 +84,7 @@ module Enumerable
   end
 
   def my_map(parameter = nil)
-    return to_enum(:my_map) unless block_given?
+    return to_enum(:my_map) unless block_given? || parameter
 
     array = []
     if parameter.nil?
@@ -110,8 +107,11 @@ module Enumerable
     end
     argument
   end
+end
+
+  # rubocop: enable all
 
   def multiply_els(items)
     items.my_inject { |result, item| result * item }
   end
-end
+
