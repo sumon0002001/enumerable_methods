@@ -110,8 +110,6 @@ module Enumerable
 end
 
   # rubocop: enable all
-
   def multiply_els(items)
     items.my_inject { |result, item| result * item }
   end
-
