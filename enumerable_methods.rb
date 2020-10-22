@@ -2,12 +2,23 @@
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Lint/RedundantCopDisableDirective
 # frozen_string_literal: true
+# rubocop:disable Style/RedundantSelf
+
+#my_Enumerable
 
 module Enumerable
+
+  #----my_each-------
+
   def my_each
+    return to_enum(:my_each) unless block_given?
+
+    item = self if self.class == Array
+    item= to_a if self.class == Range || Hash
+
     i = 0
-    until i == size
-      yield self[i]
+    while i < item.length
+      yield(item[i])
       i += 1
     end
     self
@@ -111,6 +122,12 @@ module Enumerable
     items.my_inject { |result, item| result * item }
   end
 end
+h = {foo: 0, bar: 1, baz: 2}
+
+p (0..5).each {|x| print x, "--"}
+p (0..5).my_each {|x| print x, "--"}
+p h.each {|key, value| print "#{key}: #{value}"}
+p h.my_each {|key, value| print "#{key}: #{value}"}
 
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
