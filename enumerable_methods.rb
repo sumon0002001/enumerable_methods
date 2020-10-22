@@ -1,3 +1,11 @@
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Style/Documentation
+# rubocop:disable Style/CaseEquality
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable convention:Metrics/AbcSize
+# frozen_string_literal: true
+
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -13,7 +21,7 @@ module Enumerable
     self
   end
 
-  def my_each_with_index()
+  def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
     item = to_a
@@ -49,7 +57,7 @@ module Enumerable
     true
   end
 
-  def my_any?(arg = nil) 
+  def my_any?(arg = nil)
     result = false
     to_a.my_each do |item|
       if block_given?
@@ -61,7 +69,7 @@ module Enumerable
         end
       elsif arg.nil?
         result = true if item
-      elsif arg == item
+      elsif arg === item
         result = true
         break
       end
@@ -102,7 +110,7 @@ module Enumerable
       sym = argument
       argument = nil
     end
-    if  !block_given? && !sym.nil?
+    if !block_given? && !sym.nil?
       my_each { |item| argument = argument.nil? ? item : argument.send(sym, item) }
     else
       my_each { |item| argument = argument.nil? ? item : yield(argument, item) }
@@ -114,3 +122,10 @@ end
 def multiply_els(items)
   items.my_inject { |result, item| result * item }
 end
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Style/Documentation
+# rubocop:enable Style/CaseEquality
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable convention:Metrics/AbcSize
+# frozen_string_literal: false
