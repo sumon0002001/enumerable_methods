@@ -75,29 +75,24 @@ module Enumerable
     false
   end
 
-  def my_none?
-    condition = true
-    if block_given?
-      my_each do |item|
-        if (yield item) == false
-          condition = false
-          break
-        end
-      end
-      !condition
-    end
-    condition
+  def my_none?(argument = nil, &block)
+    
+    !my_any?(argument, &block)
   end
 
   def my_count(argument = nil)
     count = 0
-    if block_given? || !argument.nil?
-      block_given? ? my_each { |item| count += 1 if yield(item) } : my_each { |item| count += 1 if argument == item }
-    else
-      object = self
-      count = object.size
+    if !block_given? && argument.nil?
+      
+      count = to_a.length
+     elsif block_given? 
+       my_each { |item| count += 1 if yield(item) } 
+     else 
+       count = my_select{|item| item == argument}.length
+  
     end
     count
+ 
   end
 
   def my_map(parameter = nil)
@@ -112,20 +107,32 @@ module Enumerable
     array
   end
 
-  def my_inject
-    return to_enum(:my_inject) unless block_given?
+  def my_inject(argument = nil, sym = nil)
+    if (!argument.nil? && sym.nil?)  && (argument.is_a?(Symbol) || argument.is_a(String))
+      sym = argument
+      argument = nil
+    end
+    if !sym.nil? && !block_given
+      my_each {|item| argument = argument.nil? ? item: argument.send(sym, item)}
+    else
+      my_each {|item| argument = argument.nil? ? item : yield(argument, item)}
+      end
+      argument
+      end
+    end
 
-    result = nil
-    my_each { |item| result = result.nil? ? item : yield(result, item) }
-    result
-  end
+
 
   def multiply_els(items)
-    items.my_inject { |result, item| result * item }
+    items.my_inject  { |result, item| result * item }
   end
-end
 
-puts [nil].my_any?
+ 
+ 
+  print multiply_els([2,4,5])
+  
+
+
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Lint/RedundantCopDisableDirective
