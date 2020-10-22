@@ -1,4 +1,6 @@
 # rubocop:disable Style/CaseEquality
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 
 module Enumerable
   def my_each
@@ -117,3 +119,5 @@ def multiply_els(items)
   items.my_inject { |result, item| result * item }
 end
 # rubocop:enable Style/CaseEquality
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
