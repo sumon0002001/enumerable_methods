@@ -35,36 +35,36 @@ module Enumerable
     array
   end
 
-  def my_all?(argument = nil)
+  def my_all?(arg = nil)
     if block_given?
       my_each { |item| return false if yield(item) == false }
-      return true
-    elsif argument.nil?
+      true
+    elsif !arg.nil? and arg.is_a?(Class)
+      my_each { |item| return false unless [item.class, item.class.superclass].include?(arg) }
+    elsif arg.nil?
       my_each { |item| return false if item.nil? || item == false }
-    elsif !argument.nil? && (argument.is_a? Class)
-      my_each { |item| return false unless [item.class, item.class.superclass].include?(argument) }
-    elsif argument.class && !argument.nil == Regexp
-      my_each { |item| return false unless argument.match(item) }
-    else 
-      my_each { |item| return false if item != argument }
+    elsif !arg.nil? && arg.class == Regexp
+      my_each { |item| return false unless arg.match(item) }
+    else
+      my_each { |item| return false if item != arg }
     end
     true
   end
 
-  def my_any?(argument = nil)
+  def my_any?(arg = nil)
     if block_given?
       my_each { |item| return true if yield(item) }
-      return false
-    elsif argument.nil?
-      my_each { |item| return true if item }
-    elsif !argument.nil? && argument.is_a?(Class)
-      my_each { |item| return true unless [item.class, item.class.superclass].include?(argument) }
-    elsif argument.class && !argument.nil == Regexp
-      my_each { |item| return true unless argument.match(item) }
+      false
+    elsif !arg.nil? and arg.is_a?(Class)
+      my_each { |item| return true unless [item.class, item.class.superclass].include?(arg) }
+    elsif arg.nil?
+      my_each { |item| return true unless item.nil? || item == false }
+    elsif !arg.nil? && arg.class == Regexp
+      my_each { |item| return true if arg.match(item) }
     else
-      my_each { |item| return true if item == argument }
+      my_each { |item| return true if item != arg }
     end
-    false
+   false
   end
 
   def my_none?(argument = nil, &block)
@@ -96,11 +96,11 @@ module Enumerable
   end
 
   def my_inject(argument = nil, sym = nil)
-    if (!argument.nil? && sym.nil?) && (argument.is_a?(Symbol) || argument.is_a(String))
+    if (!argument.nil? && sym.nil?) && (argument.is_a?(Symbol) || argument.is_a?(String))
       sym = argument
       argument = nil
     end
-    if !sym.nil? && !block_given
+    if  !block_given? && !sym.nil?
       my_each { |item| argument = argument.nil? ? item : argument.send(sym, item) }
     else
       my_each { |item| argument = argument.nil? ? item : yield(argument, item) }
@@ -113,6 +113,3 @@ end
 def multiply_els(items)
   items.my_inject { |result, item| result * item }
 end
-
-array = [2, 8, 0, 8, 1, 3, 2, 3, 2, 1, 5, 7, 0, 8, 4, 3, 7, 7, 3, 7, 5, 8, 2, 2, 6, 8, 0, 7, 7, 2, 5, 6, 7, 7, 5, 2, 3, 6, 2, 4, 8, 0, 5, 4, 0, 3, 3, 8, 5, 5, 5, 6, 0, 8, 4, 1, 5, 7, 1, 2, 7, 1, 3, 6, 4, 5, 3, 2, 7, 0, 5, 4, 1, 6, 1, 3, 2, 0, 7, 4, 2, 1, 8, 0, 3, 5, 6, 4, 5, 5, 3, 3, 4, 5, 4, 4, 7, 3, 5, 3] 
-p array.my_each_with_index { |num| num + 1 }
