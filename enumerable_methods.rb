@@ -1,10 +1,4 @@
-# rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Style/Documentation
 # rubocop:disable Style/CaseEquality
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable convention:Metrics/AbcSize
-# frozen_string_literal: true
 
 module Enumerable
   def my_each
@@ -122,10 +116,4 @@ end
 def multiply_els(items)
   items.my_inject { |result, item| result * item }
 end
-# rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Style/Documentation
 # rubocop:enable Style/CaseEquality
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/MethodLength
-# rubocop:enable convention:Metrics/AbcSize
-# frozen_string_literal: false
