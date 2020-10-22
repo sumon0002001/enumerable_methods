@@ -51,21 +51,28 @@ module Enumerable
     true
   end
 
-  def my_any?(arg = nil)
-    if block_given?
-      my_each { |item| return true if yield(item) }
-      false
-    elsif !arg.nil? and arg.is_a?(Class)
-      my_each { |item| return true unless [item.class, item.class.superclass].include?(arg) }
-    elsif arg.nil?
-      my_each { |item| return true unless item.nil? || item == false }
-    elsif !arg.nil? && arg.class == Regexp
-      my_each { |item| return true if arg.match(item) }
-    else
-      my_each { |item| return true if item != arg }
-    end
-   false
-  end
+  def my_any?(arg = nil) 
+   result = false 
+    to_a.my_each do |item| 
+      if block_given? 
+        if yield(item) 
+          result = true 
+          break 
+        elsif 
+          !yield(item) 
+          result = false 
+        end 
+      elsif arg.nil? 
+        result = true if item 
+      else 
+        if arg === item
+          result = true 
+          break 
+        end 
+      end 
+    end 
+    result 
+  end 
 
   def my_none?(argument = nil, &block)
     !my_any?(argument, &block)
