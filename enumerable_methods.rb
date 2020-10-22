@@ -31,15 +31,16 @@ module Enumerable
     item = to_a if self.class = Range || Hash
     i = 0
     until i < item.length
-      yield (item[i], i)
+      yield(item[i], i)
       i += 1
     end
     self
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
     array = []
-    my_each { |item| array << item if yield item }
+    my_each { |item| array << item if yield (item) }
     array
   end
 
@@ -126,13 +127,10 @@ module Enumerable
     items.my_inject { |result, item| result * item }
   end
 end
-h = {foo: 0, bar: 1, baz: 2}
-
-p (0..5).each {|x| print x, "--"}
-p (0..5).my_each {|x| print x, "--"}
-p h.each {|key, value| print "#{key}: #{value}"}
-p h.my_each {|key, value| print "#{key}: #{value}"}
-
+p (0..5).select {|num| num.even?}
+p (0..5).my_select {|num| num.even?}
+p [1,2,3,4].select
+p [1,2,3,4].my_select
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Lint/RedundantCopDisableDirective
