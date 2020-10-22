@@ -1,6 +1,3 @@
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
-
 # my_Enumerable
 
 module Enumerable
@@ -120,6 +117,3 @@ module Enumerable
     def multiply_els(items)
     items.my_inject { |result, item| result * item }
   end
-
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity
