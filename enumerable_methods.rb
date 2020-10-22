@@ -47,12 +47,12 @@ module Enumerable
   def my_all?(argument = nil)
     if block_given?
       my_each { |item| return false if yield(item) == false }
-      true
+      return true
     elsif argument.nil?
       my_each { |item| return false if item.nil? || item == false }
-    elsif !argument.nil? && argument.is_a?(Class)
+    elsif !argument.nil? && (argument.is_a?Class)
       my_each { |item| return false unless [item.class, item.class.superclass].include?(argument) }
-    elsif argument.class == Regexp
+    elsif argument.class && !argument.nil == Regexp
       my_each { |item| return false unless argument.match(item) }
     else my_each { |item| return false if item != argument }
     end
@@ -63,17 +63,14 @@ module Enumerable
     if block_given?
       my_each { |item| return true if yield(item) }
       return false
-    end
-    argument.nil? ? argument.class.to_s : my_any? { |item| item }
-
-    if argument.class.to_s == 'Class'
-      my_each { |item| return true if item.is_a? argument }
-    elsif argument.class.to_s == 'Regexp'
-      my_each { |item| return true if item =~ argument }
     elsif argument.nil?
-      my_each { |item| return true if item }
-    else
-      my_each { |item| return true if item == argument }
+      my_each {|item| return true if item}
+      elsif !argument.nil? && argument.is_a?(Class)
+        my_each { |item| return true unless [item.class, item.class.superclass].include?(argument) }
+      elsif argument.class && !argument.nil == Regexp
+        my_each { |item| return true unless argument.match(item) }
+      else my_each { |item| return true if item == argument }
+ 
     end
     false
   end
@@ -127,10 +124,8 @@ module Enumerable
     items.my_inject { |result, item| result * item }
   end
 end
-p (0..5).select {|num| num.even?}
-p (0..5).my_select {|num| num.even?}
-p [1,2,3,4].select
-p [1,2,3,4].my_select
+
+puts [nil].my_any?
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Lint/RedundantCopDisableDirective
