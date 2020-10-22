@@ -1,9 +1,8 @@
 # rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Lint/RedundantCopDisableDirective
-# frozen_string_literal: true
-# rubocop:disable Style/RedundantSelf
-
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Style/CaseEquality
 
 # my_Enumerable
 
@@ -127,13 +126,9 @@ module Enumerable
     items.my_inject  { |result, item| result * item }
   end
 
- 
- 
-  print multiply_els([2,4,5])
-  
-
-
 # rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength:
 # rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Lint/RedundantCopDisableDirective
-# rubocop:disable Style/RedundantSelf
+# rubocop:enable Metrics/ModuleLength
+# rubocop:enable Style/CaseEquality
+
