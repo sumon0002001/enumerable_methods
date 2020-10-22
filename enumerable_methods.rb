@@ -1,13 +1,10 @@
 # rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Metrics/ModuleLength
-# rubocop:disable Style/CaseEquality
 
 # my_Enumerable
 
 module Enumerable
-#----my_each-------
+
 
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -38,8 +35,9 @@ module Enumerable
 
   def my_select
     return to_enum(:my_select) unless block_given?
+    
     array = []
-    my_each { |item| array << item if yield (item) }
+    my_each { |item| array << item if yield item }
     array
   end
 
@@ -49,7 +47,7 @@ module Enumerable
       return true
     elsif argument.nil?
       my_each { |item| return false if item.nil? || item == false }
-    elsif !argument.nil? && (argument.is_a?Class)
+    elsif !argument.nil? && (argument.is_a? Class)
       my_each { |item| return false unless [item.class, item.class.superclass].include?(argument) }
     elsif argument.class && !argument.nil == Regexp
       my_each { |item| return false unless argument.match(item) }
@@ -62,13 +60,14 @@ module Enumerable
     if block_given?
       my_each { |item| return true if yield(item) }
       return false
-    elsif argument.nil?
-      my_each {|item| return true if item}
+      if argument.nil?
+      my_each { |item| return true if item }
       elsif !argument.nil? && argument.is_a?(Class)
         my_each { |item| return true unless [item.class, item.class.superclass].include?(argument) }
       elsif argument.class && !argument.nil == Regexp
         my_each { |item| return true unless argument.match(item) }
-      else my_each { |item| return true if item == argument }
+      else
+        my_each { |item| return true if item == argument }
  
     end
     false
@@ -87,12 +86,10 @@ module Enumerable
      elsif block_given? 
        my_each { |item| count += 1 if yield(item) } 
      else 
-       count = my_select{|item| item == argument}.length
-  
+       count = my_select { |item| item == argument }.length
     end
     count
- 
-  end
+   end
 
   def my_map(parameter = nil)
     return to_enum(:my_map) unless block_given?
@@ -107,28 +104,24 @@ module Enumerable
   end
 
   def my_inject(argument = nil, sym = nil)
-    if (!argument.nil? && sym.nil?)  && (argument.is_a?(Symbol) || argument.is_a(String))
+    if (!argument.nil? && sym.nil?) && (argument.is_a?(Symbol) || argument.is_a(String))
       sym = argument
       argument = nil
     end
     if !sym.nil? && !block_given
-      my_each {|item| argument = argument.nil? ? item: argument.send(sym, item)}
+      my_each { |item| argument = argument.nil? ? item : argument.send(sym, item) }
     else
-      my_each {|item| argument = argument.nil? ? item : yield(argument, item)}
+      my_each { |item| argument = argument.nil? ? item : yield(argument, item) }
       end
       argument
       end
     end
 
-
-
-  def multiply_els(items)
-    items.my_inject  { |result, item| result * item }
+    def multiply_els(items)
+    items.my_inject { |result, item| result * item }
   end
 
 # rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/MethodLength:
 # rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Metrics/ModuleLength
-# rubocop:enable Style/CaseEquality
+
 
