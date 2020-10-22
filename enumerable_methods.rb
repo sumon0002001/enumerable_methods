@@ -4,17 +4,17 @@
 # frozen_string_literal: true
 # rubocop:disable Style/RedundantSelf
 
-#my_Enumerable
+
+# my_Enumerable
 
 module Enumerable
-
-  #----my_each-------
+#----my_each-------
 
   def my_each
     return to_enum(:my_each) unless block_given?
 
     item = self if self.class == Array
-    item= to_a if self.class == Range || Hash
+    item = to_a if self.class == Range || Hash
 
     i = 0
     while i < item.length
@@ -25,9 +25,13 @@ module Enumerable
   end
 
   def my_each_with_index
+    return to_enum(:my_each_with_index) unless block_given?
+
+    item = self if self.class = Array
+    item = to_a if self.class = Range || Hash
     i = 0
-    until i == size
-      yield self[i], i
+    until i < item.length
+      yield (item[i], i)
       i += 1
     end
     self
@@ -132,3 +136,4 @@ p h.my_each {|key, value| print "#{key}: #{value}"}
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 # rubocop:enable Lint/RedundantCopDisableDirective
+# rubocop:disable Style/RedundantSelf
