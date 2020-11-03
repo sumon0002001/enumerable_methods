@@ -13,17 +13,13 @@ We created a our own enumerables methods in Ruby.
 - my_map
 - my_inject
 
-
 ## Built With
 
 - Ruby
 
-
-
 ## Getting Started
 
 **This project was created for the sole purpose of understanding the concept of enumerable methods and creating methods in ruby.**
-
 
 To get a local copy up and running follow these simple example steps.
 
@@ -40,18 +36,12 @@ To run our project type 'ruby enumerable_methods.rb' in your terminal where your
 ## Running Tests
    
    - Open the console
-   - Navigate to the Tic-Tac-Toe project
-   - Run gem install rspec
+   - Navigate to the enumerable_methods project
+   - Run gem install rspec or bundle install
    - Run rspec
-   - The spec file is in the spec folder
+   - Inside the spec folder you can find the enumerable_methods_spec.rb file
 
 ## Authors
-
-👤 **Mir Rawshan Ali**
-
-- GitHub: [@sumon0002009](https://github.com/sumon0002001)
-- Twitter: [@sumon0002009](https://twitter.com/Sumon0002009)
-- LinkedIn: [Mir Rawshan Ali](https://www.linkedin.com/in/mir-rawshan-ali-27b6a5198/)
 
 👤 **KenderB**
 
@@ -65,12 +55,9 @@ To run our project type 'ruby enumerable_methods.rb' in your terminal where your
 - Twitter: [@willnyamunokora](https://twitter.com/willnyamunokora)
 - Linkedin: [linkedin Profile](https://www.linkedin.com/in/willnyamunokora/)
 
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
-
-
 
 ## Show your support
 

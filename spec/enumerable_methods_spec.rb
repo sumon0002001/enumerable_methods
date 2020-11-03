@@ -165,4 +165,10 @@ RSpec.describe 'An ideal Enumerable Module' do
       expect(numerical_array.my_inject(0, :*)).to eq(0)
     end
   end
+
+  describe '#multiply_els' do
+    it 'Multiplies up all the items received as an argument' do
+      expect(multiply_els(numerical_array)).to eq(120)
+    end
+  end
 end
