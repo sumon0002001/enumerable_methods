@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength
+
 require_relative '../enumerable_methods'
 
 RSpec.describe 'An ideal Enumerable Module' do
@@ -166,3 +170,4 @@ RSpec.describe 'An ideal Enumerable Module' do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
