@@ -1,7 +1,9 @@
 # rubocop:disable Style/CaseEquality
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/ModuleLength
 
+# Module name Enumerable, created in order to implemment Enumerable Methods
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -42,7 +44,9 @@ module Enumerable
       my_each { |item| return false if yield(item) == false }
       true
     elsif !arg.nil? && arg.is_a?(Class)
-      my_each { |item| return false unless [item.class, item.class.superclass].include?(arg) }
+      my_each do |item|
+        return false unless [item.class, item.class.superclass].include?(arg)
+      end
     elsif arg.nil?
       my_each { |item| return false if item.nil? || item == false }
     elsif !arg.nil? && arg.instance_of?(Regexp)
@@ -102,12 +106,15 @@ module Enumerable
   end
 
   def my_inject(argument = nil, sym = nil)
-    if (!argument.nil? && sym.nil?) && (argument.is_a?(Symbol) || argument.is_a?(String))
+    if (!argument.nil? && sym.nil?) &&
+       (argument.is_a?(Symbol) || argument.is_a?(String))
       sym = argument
       argument = nil
     end
     if !block_given? && !sym.nil?
-      my_each { |item| argument = argument.nil? ? item : argument.send(sym, item) }
+      my_each do |item|
+        argument = argument.nil? ? item : argument.send(sym, item)
+      end
     else
       my_each { |item| argument = argument.nil? ? item : yield(argument, item) }
     end
@@ -121,3 +128,4 @@ end
 # rubocop:enable Style/CaseEquality
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/ModuleLength
