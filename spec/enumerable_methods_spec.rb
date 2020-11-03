@@ -23,24 +23,24 @@ RSpec.describe 'An ideal Enumerable Module' do
     it 'When no block is given it is an instance of an Enumerator class' do
       expect(numerical_array.my_each).to be_an(Enumerator)
     end
+  end
 
-    describe '#my_each_with_index' do
-      it 'The array does not change' do
-        numerical_array.my_each_with_index { |item, index| results.push(index) }
-        expect(results).to eq([0, 1, 2, 3, 4])
-      end
-    
-      it 'The methods receives a range' do
-        expect(range.my_each_with_index { |item| item + 5 }).to eq(range)
-      end
-    
-      it 'The methods receives a Hash' do
-        expect(hash.my_each_with_index { |item| item }).to eq(hash)
-      end
-    
-      it 'When no block is given it is an instance of an Enumerator class' do
-        expect(numerical_array.my_each_with_index).to be_an(Enumerator)
-      end
+  describe '#my_each_with_index' do
+    it 'The array does not change' do
+      numerical_array.my_each_with_index { |item, index| results.push(index) }
+      expect(results).to eq([0, 1, 2, 3, 4])
+    end
+  
+    it 'The methods receives a range' do
+      expect(range.my_each_with_index { |item| item + 5 }).to eq(range)
+    end
+  
+    it 'The methods receives a Hash' do
+      expect(hash.my_each_with_index { |item| item }).to eq(hash)
+    end
+  
+    it 'When no block is given it is an instance of an Enumerator class' do
+      expect(numerical_array.my_each_with_index).to be_an(Enumerator)
     end
   end
 
