@@ -37,6 +37,13 @@ Download the code or copy the git repository to your computer.
 ### Usage
 To run our project type 'ruby enumerable_methods.rb' in your terminal where your file is stored.
 
+## Running Tests
+   
+   - Open the console
+   - Navigate to the Tic-Tac-Toe project
+   - Run gem install rspec
+   - Run rspec
+   - The spec file is in the spec folder
 
 ## Authors
 
@@ -51,6 +58,12 @@ To run our project type 'ruby enumerable_methods.rb' in your terminal where your
 - GitHub: [@kenderb](https://github.com/kenderb)
 - Twitter: [@KBTarts](https://twitter.com/KBTarts)
 - LinkedIn: [Kender Bolivar](https://www.linkedin.com/in/kender-bolivar-1736086b//)
+
+👤 **Will Nyamunokora**
+
+- Github: [@bigwizzo](https://github.com/bigwizzo)
+- Twitter: [@willnyamunokora](https://twitter.com/willnyamunokora)
+- Linkedin: [linkedin Profile](https://www.linkedin.com/in/willnyamunokora/)
 
 
 ## 🤝 Contributing
