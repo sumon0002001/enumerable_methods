@@ -1,7 +1,3 @@
-# frozen_string_literal: true
-
-# rubocop:disable Metrics/BlockLength
-
 require_relative '../enumerable_methods'
 
 RSpec.describe 'An ideal Enumerable Module' do
@@ -157,11 +153,11 @@ RSpec.describe 'An ideal Enumerable Module' do
       expect(numerical_array.my_inject(:+)).to eq(15)
     end
 
-    it 'Sums up all the items inside the range with the condition given in the block' do
+    it 'Sums all items of the range with the condition given in the block' do
       expect(range.my_inject { |item, n| item + n }).to eq(15)
     end
 
-    it 'The methods receives two arguments and return the result of the operation' do
+    it 'The methods receives two arguments and return the result' do
       expect(numerical_array.my_inject(1, :*)).to eq(120)
     end
 
@@ -170,4 +166,3 @@ RSpec.describe 'An ideal Enumerable Module' do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

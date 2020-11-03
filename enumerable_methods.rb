@@ -1,10 +1,6 @@
-# frozen_string_literal: true
-
 # rubocop:disable Style/CaseEquality
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
 
 # Module name Enumerable, created in order to implemment Enumerable Methods
 module Enumerable
@@ -109,12 +105,15 @@ module Enumerable
   end
 
   def my_inject(argument = nil, sym = nil)
-    if (!argument.nil? && sym.nil?) && (argument.is_a?(Symbol) || argument.is_a?(String))
+    if (!argument.nil? && sym.nil?) &&
+       (argument.is_a?(Symbol) || argument.is_a?(String))
       sym = argument
       argument = nil
     end
     if !block_given? && !sym.nil?
-      my_each { |item| argument = argument.nil? ? item : argument.send(sym, item) }
+      my_each do |item|
+        argument = argument.nil? ? item : argument.send(sym, item)
+      end
     else
       my_each { |item| argument = argument.nil? ? item : yield(argument, item) }
     end
@@ -128,5 +127,3 @@ end
 # rubocop:enable Style/CaseEquality
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
-# rubocop:enable Metrics/MethodLength
-# rubocop:enable Metrics/AbcSize
