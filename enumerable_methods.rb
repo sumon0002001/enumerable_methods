@@ -1,6 +1,7 @@
 # rubocop:disable Style/CaseEquality
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/ModuleLength
 
 # Module name Enumerable, created in order to implemment Enumerable Methods
 module Enumerable
@@ -127,3 +128,4 @@ end
 # rubocop:enable Style/CaseEquality
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/ModuleLength
