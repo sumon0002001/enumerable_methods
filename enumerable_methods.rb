@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:disable Style/Documentation
 # rubocop:disable Style/CaseEquality
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
@@ -42,7 +45,9 @@ module Enumerable
       my_each { |item| return false if yield(item) == false }
       true
     elsif !arg.nil? && arg.is_a?(Class)
-      my_each { |item| return false unless [item.class, item.class.superclass].include?(arg) }
+      my_each do |item|
+        return false unless [item.class, item.class.superclass].include?(arg)
+      end
     elsif arg.nil?
       my_each { |item| return false if item.nil? || item == false }
     elsif !arg.nil? && arg.instance_of?(Regexp)
@@ -121,3 +126,4 @@ end
 # rubocop:enable Style/CaseEquality
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Style/Documentation
