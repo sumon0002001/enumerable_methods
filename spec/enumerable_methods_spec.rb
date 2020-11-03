@@ -1,4 +1,3 @@
-
 require_relative '../enumerable_methods'
 
 RSpec.describe 'An ideal Enumerable Module' do
@@ -167,4 +166,3 @@ RSpec.describe 'An ideal Enumerable Module' do
     end
   end
 end
-
