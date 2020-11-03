@@ -74,5 +74,17 @@ RSpec.describe 'An ideal Enumerable Module' do
       expect(numerical_array.my_select).to be_an(Enumerator)
     end
   end
+
+  describe 'my_all?' do
+    it 'Returns true if all items meet the block condition' do
+      expect(numerical_array.my_all? { |item| item.instance_of? Integer })
+        .to eq(true)
+    end
+
+    it 'Returns false if one item or more does not meet the block condition' do
+      expect(numerical_array.my_all? { |item| item.instance_of? String })
+        .to eq(false)
+    end
+  end
 end
 # rubocop:enable Metrics/BlockLength
